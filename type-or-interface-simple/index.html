@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shower Presentation Engine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <link rel="stylesheet" href="prism.css" rel="stylesheet">
+    <style>
+        .shower {
+            --slide-ratio: calc(4 / 3);
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>TS issues</h1>
+    </header>
+
+    <section class="slide">
+        <h2 class="shout">Interface or type?</h2>
+    </section>
+
+    <section class="slide">
+        <div class="columns two">
+            <div>
+                <div>Interface</div>
+                <ol>
+                    <li>...</li>
+                </ol>
+            </div>
+            <div>
+                <div>Type</div>
+                <ol>
+                    <li>...</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Primitives</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Primitives</h2>
+        <pre class="code"><code class="language-ts"><pre><code>type CustomerRole = string;</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Primitives</h2>
+        <pre class="code"><code class="language-ts"><pre><code>type CustomerRole = string;</code></pre></code></pre>
+        <pre class="code"><code class="language-ts"><pre><code>interface CustomerRole extends string {};</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Primitives</h2>
+        <pre class="code"><code class="language-ts"><pre><code>type CustomerRole = string;</code></pre></code></pre>
+        <pre class="code"><code class="language-ts"><pre><code>interface CustomerRole extends string {}; 🚫</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// An interface cannot extend 
+// a primitive type like 'string'. 
+// It can only extend other named object types</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Primitives</h2>
+        <pre class="code"><code class="language-ts"><pre><code>type CustomerRole = string;</code> ✅</pre></code></pre>
+        <pre class="code"><code class="language-ts"><pre><code>interface CustomerRole extends string {}; 🚫</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// An interface cannot extend 
+// a primitive type like 'string'. 
+// It can only extend other named object types</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Symbol</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Symbol</h2>
+<pre class="code"><code class="language-ts"><pre><code>type PersonId = Symbol</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Symbol</h2>
+<pre class="code"><code class="language-ts"><pre><code>type PersonId = Symbol</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface PersonId extends Symbol {}</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Symbol</h2>
+<pre class="code"><code class="language-ts"><pre><code>type PersonId = Symbol</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface PersonId extends Symbol {}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>const id: PersonId = Symbol("foo");</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Symbol</h2>
+<pre class="code"><code class="language-ts"><pre><code>type PersonId = Symbol ✅</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface PersonId extends Symbol {} ✅</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>const id: PersonId = Symbol("foo");</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Undefined</h2>
+
+    </section>
+
+    <section class="slide">
+        <h2>Undefined</h2>
+<pre class="code"><code class="language-ts"><pre><code>type CustomerIds = string[] | undefined;</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Undefined</h2>
+<pre class="code"><code class="language-ts"><pre><code>type CustomerIds = string[] | undefined;</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface CustomerIds extends undefined, Array {
+  [index: number]: string
+};</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Undefined</h2>
+<pre class="code"><code class="language-ts"><pre><code>type CustomerIds = string[] | undefined;</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface CustomerIds extends undefined, Array {
+  [index: number]: string
+};</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// 'undefined' refers to a value, 
+// but is being used as a type here. 
+// Did you mean 'typeof undefined'?</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Undefined</h2>
+<pre class="code"><code class="language-ts"><pre><code>type CustomerIds = string[] | undefined;  ✅</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface CustomerIds extends undefined, Array {
+  [index: number]: string
+};</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// 'undefined' refers to a value, 
+// but is being used as a type here. 
+// Did you mean 'typeof undefined'?</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Undefined</h2>
+<pre class="code"><code class="language-ts"><pre><code>type CustomerIds = string[] | undefined;  ✅</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface CustomerIds extends undefined, Array {
+  [index: number]: string
+}; 🚫</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// 'undefined' refers to a value, 
+// but is being used as a type here. 
+// Did you mean 'typeof undefined'?</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <div class="columns two">
+            <div>
+                <div>Interface</div>
+                <ol>
+                    <li>symbol, bigint</li>
+                </ol>
+            </div>
+            <div>
+                <div>Type</div>
+                <ol>
+                    <li>string, number, boolean, undefined, null, any, unknown, never, symbol, bigint</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Array</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Array</h2>
+<pre class="code"><code class="language-ts"><pre><code>type CustomerIds = string[];</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Array</h2>
+<pre class="code"><code class="language-ts"><pre><code>type CustomerIds = string[];</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface CustomerIds extends Array&lt;string> {
+  [index: number]: string
+};</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Array</h2>
+<pre class="code"><code class="language-ts"><pre><code>type CustomerIds = string[];</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface CustomerIds extends Array&lt;string> {
+  [index: number]: string
+};</code></pre></code></pre>
+        <pre class="code"><code class="language-ts"><pre><code>const ids: CustomerIds = ['e2af', 'ae1f'];</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Array</h2>
+<pre class="code"><code class="language-ts"><pre><code>type CustomerIds = string[]; ✅</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface CustomerIds extends Array&lt;string> {
+  [index: number]: string
+}; ✅</code></pre></code></pre>
+        <pre class="code"><code class="language-ts"><pre><code>const ids: CustomerIds = ['e2af', 'ae1f'];</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Tuple</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Tuple</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Person = [string, number];</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Tuple</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Person = [string, number];</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface Person extends Array&lt;string | number> {
+  0: string, 1: number 
+};</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Tuple</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Person = [string, number];</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface Person extends Array&lt;string | number> {
+  0: string, 1: number 
+};</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>const Dima: Person = ['Dima', 100];</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Tuple</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Person = [string, number]; ✅</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface Person extends Array&lt;string | number> {
+  0: string, 1: number 
+}; ✅</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>const Dima: Person = ['Dima', 100];</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <div class="columns two">
+            <div>
+                <div>Interface</div>
+                <ol>
+                    <li>symbol, bigint</li>
+                    <li>array, tuple</li>
+                </ol>
+            </div>
+            <div>
+                <div>Type</div>
+                <ol>
+                    <li>string, number, boolean, undefined, null, any, unknown, never, symbol, bigint</li>
+                    <li>array, tuple</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Enum</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Enum</h2>
+<pre class="code"><code class="language-ts"><pre><code>enum ShapeKind {
+  Circle,
+  Square,
+}</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Enum</h2>
+<pre class="code"><code class="language-ts"><pre><code>enum ShapeKind {
+  Circle,
+  Square,
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>type TShapeKind = ShapeKind;</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Enum</h2>
+<pre class="code"><code class="language-ts"><pre><code>enum ShapeKind {
+  Circle,
+  Square,
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>type TShapeKind = ShapeKind;</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>const Circle:TShapeKind = ShapeKind.Circle;</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Enum</h2>
+<pre class="code"><code class="language-ts"><pre><code>enum ShapeKind {
+  Circle,
+  Square,
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>type TShapeKind = ShapeKind; ✅</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>const Circle:TShapeKind = ShapeKind.Circle;</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Enum</h2>
+<pre class="code"><code class="language-ts"><pre><code>enum ShapeKind {
+  Circle,
+  Square,
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface IShapeKind extends ShapeKind {}</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Enum</h2>
+<pre class="code"><code class="language-ts"><pre><code>enum ShapeKind {
+  Circle,
+  Square,
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface IShapeKind extends ShapeKind {}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// An interface can only extend 
+// an object type or intersection of object types
+// with statically known members.</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Enum</h2>
+<pre class="code"><code class="language-ts"><pre><code>enum ShapeKind {
+  Circle,
+  Square,
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface IShapeKind extends ShapeKind {} 🚫</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// An interface can only extend 
+// an object type or intersection of object types
+// with statically known members.</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <div class="columns two">
+            <div>
+                <div>Interface</div>
+                <ol>
+                    <li>symbol, bigint</li>
+                    <li>array, tuple</li>
+                </ol>
+            </div>
+            <div>
+                <div>Type</div>
+                <ol>
+                    <li>string, number, boolean, undefined, null, any, unknown, never, symbol, bigint</li>
+                    <li>array, tuple</li>
+                    <li>enum</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Class</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Class</h2>
+<pre class="code"><code class="language-ts"><pre><code>interface Movie {
+  title: string;
+  characters: string[];
+}</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Class</h2>
+<pre class="code"><code class="language-ts"><pre><code>interface Movie {
+  title: string;
+  characters: string[];
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>class Film implements Movie { 
+  title = 'Back to the Future';
+  characters = ['doc', 'mcfly'];
+}</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Class</h2>
+<pre class="code"><code class="language-ts"><pre><code>class Film implements Movie { 
+  title = 'Back to the Future';
+  characters = ['doc', 'mcfly'];
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>const film = new Film();</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Class</h2>
+<pre class="code"><code class="language-ts"><pre><code>class Film implements Movie { 
+  title = 'Back to the Future';
+  characters = ['doc', 'mcfly'];
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>const film = new Film(); ✅</code></pre></code></pre>
+
+    </section>
+
+    <section class="slide">
+        <h2>Class</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Movie = {
+  title: string,
+  characters: string[]
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>class Film implements Movie { 
+  title = 'Back to the Future';
+  characters = ['doc', 'mcfly'];
+}</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Class</h2>
+<pre class="code"><code class="language-ts"><pre><code>class Film implements Movie { 
+  title = 'Back to the Future';
+  characters = ['doc', 'mcfly'];
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>const film = new Film();</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Class</h2>
+<pre class="code"><code class="language-ts"><pre><code>class Film implements Movie { 
+  title = 'Back to the Future';
+  characters = ['doc', 'mcfly'];
+}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>const film = new Film(); ✅</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Imlements</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Imlements</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Film implements Movie {}</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Imlements</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Film implements Movie {}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// Cannot find name 'implements'.</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Imlements</h2>
+<pre class="code"><code class="language-ts"><pre><code>interface Film implements Movie {}</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Imlements</h2>
+<pre class="code"><code class="language-ts"><pre><code>interface Film implements Movie {}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// Interface declaration
+// cannot have 'implements' clause.</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Imlements</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Film implements Movie {} 🚫</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface Film implements Movie {} 🚫</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Extends</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Extends</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Film extends Movie {}</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Extends</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Film extends Movie {}</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// Cannot find name 'extends'.</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Extends</h2>
+<pre class="code"><code class="language-ts"><pre><code>interface Film extends Movie {}</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Extends</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Film extends Movie {} 🚫</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface Film extends Movie {} ✅</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Union Types</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Union Types</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Jobs = 'frontend' | 'backend';</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Union Types</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Jobs = 'frontend' | 'backend';</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface LeroyJobs extends 'frontend' | 'backend' {};</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Union Types</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Jobs = 'frontend' | 'backend';</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface LeroyJobs extends 'frontend' | 'backend' {};</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// An interface can only 
+// extend an identifier/qualified-name
+// with optional type arguments</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Union Types</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Jobs = 'frontend' | 'backend'; ✅</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface LeroyJobs extends 'frontend' | 'backend' {}; 🚫</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Intersection Types</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Jobs = 'frontend' & 'backend';</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Union Types</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Jobs = 'frontend' & 'backend';</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface LeroyJobs extends 'frontend' & 'backend' {};</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Union Types</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Jobs = 'frontend' & 'backend';</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface LeroyJobs extends 'frontend' & 'backend' {};</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>// An interface can only 
+// extend an identifier/qualified-name
+// with optional type arguments</code></pre></code></pre>
+    </section>
+
+    <section class="slide">
+        <h2>Union Types</h2>
+<pre class="code"><code class="language-ts"><pre><code>type Jobs = 'frontend' & 'backend'; ✅</code></pre></code></pre>
+<pre class="code"><code class="language-ts"><pre><code>interface LeroyJobs extends 'frontend' & 'backend' {}; 🚫</code></pre></code></pre>
+    </section>
+    
+    <section class="slide">
+        <div class="columns two">
+            <div>
+                <div>Interface</div>
+                <ol>
+                    <li>symbol, bigint</li>
+                    <li>array, tuple</li>
+                    <li><s>implements</s></li>
+                    <li>extends</li>
+                </ol>
+            </div>
+            <div>
+                <div>Type</div>
+                <ol>
+                    <li>string, number, boolean, undefined, null, any, unknown, never, symbol, bigint</li>
+                    <li>array, tuple</li>
+                    <li>enum</li>
+                    <li><s>implements</s></li>
+                    <li>union and intersection types</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <div class="columns two">
+            <div>
+                <div>Interface</div>
+                <ol>
+                    <li>symbol, bigint</li>
+                    <li>array, tuple</li>
+                    <li>extends</li>
+                </ol>
+            </div>
+            <div>
+                <div>Type</div>
+                <ol>
+                    <li>string, number, boolean, undefined, null, any, unknown, never, symbol, bigint</li>
+                    <li>array, tuple</li>
+                    <li>enum</li>
+                    <li>union and intersection types</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <div class="columns two">
+            <div>
+                <div>Interface</div>
+                <ol>
+                    <li>symbol, bigint</li>
+                    <li>array, tuple</li>
+                    <li>extends</li>
+                    <li>advanced type features (utility types, conditional types, type guard, mapped types, ...)*</li>
+                </ol>
+            </div>
+            <div>
+                <div>Type</div>
+                <ol>
+                    <li>string, number, boolean, undefined, null, any, unknown, never, symbol, bigint</li>
+                    <li>array, tuple</li>
+                    <li>enum</li>
+                    <li>union and intersection types</li>
+                    <li>advanced type features (utility types, conditional types, type guard, mapped types, ...)</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+      
+        <ul>  
+          <li><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html">TypeScript release notes</a></li>
+          <li><a href="https://www.typescriptlang.org/play">TypeScript playground</a></li>
+          <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces">Differences Between Type Aliases and Interfaces</a></li>
+          <li><a href="https://fettblog.eu/archive/typescript/">Stefan Baumgartner blog</a></li>
+          <li><a href="https://livebook.manning.com/book/programming-with-types/about-this-book/">Programming with Types</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Glossary">MDN Glossary</a></li>
+        </ul>
+      </section>
+
+<div class="progress"></div>
+
+<script src="shower/shower.js"></script>
+<script src="./prism.js"></script>
+
+</body>
+</html>
